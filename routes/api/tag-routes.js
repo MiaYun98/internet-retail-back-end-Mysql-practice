@@ -32,10 +32,7 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   // create a new tag
   Tag.create({
-    product_name: product_name,
-    price: price,
-    stock: stock,
-    category_id: category_id,
+    tag_name: req.body.tag_name,
   }).then(data => {
     res.json(data);
   }).catch(err => {
@@ -48,18 +45,15 @@ router.put('/:id', (req, res) => {
   // update a tag's name by its `id` value
   Tag.update(
     {
-      product_name: product_name,
-      price: price,
-      stock: stock,
-      category_id: category_id,
+      tag_name: req.body.tag_name,
     },
     {
       where: {
         id: req.params.id,
       }
     }
-  ).then(updatePro => {
-    res.json(updatePro);
+  ).then(updateTag => {
+    res.json(updateTag);
   }).catch(err => {
     res.json(err);
   })
@@ -71,8 +65,8 @@ router.delete('/:id', (req, res) => {
     where: {
       id: req.params.id,
     },
-  }).then(deletePro => {
-    res.json(deletePro);
+  }).then(deleteTag => {
+    res.json(deleteTag);
   }).catch(err => {
     res.json(err);
   })
